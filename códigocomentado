@@ -1,0 +1,57 @@
+using System;
+
+// Classe principal que contém o ponto de entrada do programa.
+class Bicicleta
+{
+    // O método Main é o ponto de início da execução.
+    static void Main()
+    {
+        // Lê o nome do modelo da bicicleta.
+        string modelo = Console.ReadLine();
+
+        // Lê o nível de bateria como texto.
+        string nivelStr = Console.ReadLine();
+        
+        // Converte a string do nível de bateria para um número inteiro de forma segura.
+        if (int.TryParse(nivelStr, out int nivelBateria))
+        {
+            // Cria um objeto para representar a bicicleta com os dados lidos.
+            BicicletaInterna bicicleta = new BicicletaInterna(modelo, nivelBateria);
+
+            // Exibe a mensagem formatada no console.
+            Console.WriteLine(bicicleta.ObterMensagem());
+        }
+        else
+        {
+            // Trata o caso de entrada inválida.
+            Console.WriteLine("Entrada de bateria inválida.");
+        }
+    }
+}
+
+// Classe que modela o objeto bicicleta e sua lógica de cálculo.
+class BicicletaInterna
+{
+    // Atributos privados para o modelo e nível de bateria.
+    private string modelo;
+    private int nivelBateria;
+
+    // Construtor: inicializa os atributos da bicicleta.
+    public BicicletaInterna(string modelo, int nivelBateria)
+    {
+        this.modelo = modelo;
+        this.nivelBateria = nivelBateria;
+    }
+
+    // Calcula a distância com base no nível da bateria.
+    public double CalcularDistancia()
+    {
+        return (double)nivelBateria * 0.5;
+    }
+
+    // Retorna a mensagem formatada para exibição.
+    public string ObterMensagem()
+    {
+        return $"{modelo}: Distancia estimada = {CalcularDistancia():F1} km";
+    }
+}
